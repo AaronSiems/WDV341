@@ -39,7 +39,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/Homework/WDV101/homework.html">WDV101 Intro HTML</a></li>
                                     <li><a href="/Homework/WDV221/homework.html">WDV221 Intro JS</a></li>
-                                    <li><a href="/Homework/WDV341/homework.html">WDV341 Intro PHP</a></li>
+                                    <li><a href="/Homework/WDV341/homework.php">WDV341 Intro PHP</a></li>
                                 </ul>
                             </li>
                             <li><a class="nav-link" href="../../contact.html">Contact Me</a></li>
