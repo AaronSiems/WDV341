@@ -58,7 +58,7 @@
                 <ul style="float: right;">
                     </br>
                     </br>
-                    
+                    <li><a href="basics.php" target="_blank">PHP Basics</a></li>
                 </ul>
             </div>
         </section>
