@@ -53,6 +53,7 @@
                     </br>
                     </br>
                     <li><a href="testGit.php" target="_blank">Github test</a></li>
+                    <li><a href="functions.php" target="_blank">PHP Functions</a></li>
                 </ul>
                 
                 <ul style="float: right;">
