@@ -37,12 +37,13 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Homework <i class="fa fa-caret-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Homework/WDV101/homework.html">WDV101 Intro HTML</a></li>
-                                    <li><a href="/Homework/WDV221/homework.html">WDV221 Intro JS</a></li>
-                                    <li><a href="/Homework/WDV341/homework.php">WDV341 Intro PHP</a></li>
+                                    <li><a href="../WDV101/homework.html">WDV101 Intro HTML</a></li>
+                                    <li><a href="../WDV221/homework.html">WDV221 Intro JS</a></li>
+                                    <li><a href="../WDV341/homework.php">WDV341 Intro PHP</a></li>
                                 </ul>
                             </li>
-                            <li><a class="nav-link" href="../../contact.html">Contact Me</a></li>
+                            <li><a class="nav-link" href="../../contact.php">Contact Me</a></li>
+                            <li><a class="nav-link" href="../../collections.html"> Collections</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -54,13 +55,14 @@
                     </br>
                     <li><a href="testGit.php" target="_blank">Github test</a></li>
                     <li><a href="functions.php" target="_blank">PHP Functions</a></li>
+                    <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
                 </ul>
                 
                 <ul style="float: right;">
                     </br>
                     </br>
                     <li><a href="basics.php" target="_blank">PHP Basics</a></li>
-                    <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form</a></li>
+                    <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
                 </ul>
             </div>
         </section>

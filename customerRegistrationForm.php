@@ -1,4 +1,6 @@
 <?php
+require('FormValidator.php');
+$v = new FormValidator();
 $inName = "";
 $inPhone = "";
 $inEmail = "";
@@ -48,8 +50,29 @@ if(isset($_POST["submit"])) {
     }
     $inRequest = $_POST["specialRequest"];
 
-    if ($robotValidation) { //if captcha is correct -> do stuff with data
-        //echo "<p> $inName, $inPhone, $inEmail, $inRegistration, $inBadge, $inFridayMeal, $inSatMeal, $inSunMeal, $inRequest </p>";
+    if (!($v::validateName($inName))) {
+        $errorMessage .= "Invalid Name <br>";
+    }
+    if (!($v::validatePhone($inPhone))) {
+        $errorMessage .= "Invalid Phone <br>";
+    }
+    if (!($v::validateEmail($inEmail))) {
+        $errorMessage .= "Invalid Email <br>";
+    }
+    if (empty($inRegistration)) {
+        $errorMessage .= "Must select registration type <br>";
+    }
+    if (empty($inBadge)) {
+        $errorMessage .= "Must select a badge holder <br>";
+    }
+    if (!($v::validateTextArea($inRequest, 200))) {
+        $errorMessage .= "Your request is too long or contains an invalid character <br>";
+    }
+    if ($robotValidation) { 
+        if(empty($errorMessage)) {
+            //do stuff with data
+            //echo "<p> $inName, $inPhone, $inEmail, $inRegistration, $inBadge, $inFridayMeal, $inSatMeal, $inSunMeal, $inRequest </p>";
+        }
     } else {
         $robotError = "Captcha failed";
     }
@@ -117,12 +140,12 @@ if(isset($_POST["reset"])) {
                 </p>
                 <p>
                     <label for="registration">Registration: </label>
-                    <select name="registration" id="registration" value="<?php echo "$inRegistration" ?>">
-                        <option value="">Choose Type</option>
-                        <option value="Attendee">Attendee</option>
-                        <option value="Presenter">Presenter</option>
-                        <option value="Volunteer">Volunteer</option>
-                        <option value="Guest">Guest</option>
+                    <select name="registration" id="registration">
+                        <option value="" <?php if(isset($inRegistration) && $inRegistration=="") {echo "selected";} ?> >Choose Type</option>
+                        <option value="Attendee" <?php if(isset($inRegistration) && $inRegistration=="Attendee") {echo "selected";} ?>>Attendee</option>
+                        <option value="Presenter" <?php if(isset($inRegistration) && $inRegistration=="Presenter") {echo "selected";} ?>>Presenter</option>
+                        <option value="Volunteer" <?php if(isset($inRegistration) && $inRegistration=="Volunteer") {echo "selected";} ?>>Volunteer</option>
+                        <option value="Guest" <?php if(isset($inRegistration) && $inRegistration=="Guest") {echo "selected";} ?>>Guest</option>
                     </select>
                 </p>
                 <p>Badge Holder:</p>
@@ -146,7 +169,7 @@ if(isset($_POST["reset"])) {
                 <p>
                     <label for="textarea">Special Requests/Requirements: (Limit 200 characters)<br>
                     </label>
-                    <textarea name="specialRequest" cols="40" rows="5" id="specialRequest"></textarea>
+                    <textarea name="specialRequest" cols="40" rows="5" id="specialRequest"><?php echo $inRequest;?></textarea>
                 </p>
 
                 <div class="g-recaptcha" data-sitekey="6Ldwj7wUAAAAABFpKd-j8I0GWxb3zPCzX-yCZDx1"></div>
