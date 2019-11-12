@@ -63,6 +63,7 @@
                     </br>
                     <li><a href="basics.php" target="_blank">PHP Basics</a></li>
                     <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
+                    <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
                 </ul>
             </div>
         </section>
