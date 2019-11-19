@@ -39,12 +39,14 @@ if(isset($_POST["submit"])) {
     $date = $_POST["date"];
     $time = $_POST["time"];
 
-    if (!($v::validateName($name))) {
+    if (empty($name)) {
+        $errorMessage .= "Invalid Name <br>";
+    } else if (!($v::validateTextArea($description, 150))) {
         $errorMessage .= "Invalid Name <br>";
     }
     if (empty($description)) {
         $errorMessage .= "Invalid Description <br>";
-    } else if (!($v::validateTextArea($description, 20))) {
+    } else if (!($v::validateTextArea($description, 150))) {
         $errorMessage .= "Invalid Description <br>";
     }
     if (!($v::validateName($presenter))) {
