@@ -5,6 +5,8 @@ $username = "root";
 $password = "";
 $database = "wdv341";
 
+$ConnectionError = "";
+
 try {
     $conn = new PDO("mysql:host=$serverName;dbname=$database", $username, $password);
     // set the PDO error mode to exception
@@ -13,7 +15,7 @@ try {
 }
 catch(PDOException $e)
 {
-    echo "Connection failed: " . $e->getMessage();
+    $ConnectionError = $e;
 }
 ?>
 

@@ -55,6 +55,7 @@
                     </br>
                     <li><a href="testGit.php" target="_blank">Github test</a></li>
                     <li><a href="functions.php" target="_blank">PHP Functions</a></li>
+                    <li><a href="connectionTest.php" target="_blank">PHP Connection Test</a></li>
                     <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
                 </ul>
                 
