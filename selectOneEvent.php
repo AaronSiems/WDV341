@@ -96,7 +96,7 @@ if(isset($_POST["reset"])) {
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Events insert</title>
+        <title>Events Select One</title>
         <style>
             .error	{
                 color:red;
