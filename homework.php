@@ -50,21 +50,23 @@
                 
                 </br>
                 <h3><a href="https://github.com/AaronSiems/WDV341" target="_blank">Github folder</a></h3>
-                <ul style="float: left;">
+                <ul style="float: left; text-align: left;">
                     </br>
                     </br>
                     <li><a href="testGit.php" target="_blank">Github test</a></li>
                     <li><a href="functions.php" target="_blank">PHP Functions</a></li>
                     <li><a href="connectionTest.php" target="_blank">PHP Connection Test</a></li>
                     <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
+                    <li><a href="selectOneEvent.php" target="_blank">Select One Event</a></li>
                 </ul>
                 
-                <ul style="float: right;">
+                <ul style="float: right; text-align: left;">
                     </br>
                     </br>
                     <li><a href="basics.php" target="_blank">PHP Basics</a></li>
                     <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
                     <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
+                    <li><a href="selectEvents.php" target="_blank">Select Events</a></li>
                 </ul>
             </div>
         </section>
