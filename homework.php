@@ -67,6 +67,7 @@
                     <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
                     <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
                     <li><a href="selectEvents.php" target="_blank">Select Events</a></li>
+                    <li><a href="formatEvents/formatEvents.php" target="_blank">Formated Select</a></li>
                 </ul>
             </div>
         </section>
