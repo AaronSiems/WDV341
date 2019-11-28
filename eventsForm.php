@@ -1,59 +1,43 @@
 <?php
-require_once("connectPDO.php");
-require_once("FormValidator.php");
+session_start();
+if(isset($_SESSION['validUser']) && $_SESSION['validUser'] == true) {
 
-$v = new FormValidator();
-$name = "";
-$description = "";
-$presenter = "";
-date_default_timezone_set('America/Chicago');
-$date = date('Y-m-d', time());
-$time = date('G:i', time());
-$robotValidation = false;
+    require_once("connectPDO.php");
+    require_once("FormValidator.php");
 
-$robotError = "";
-$errorMessage = "";
+    $v = new FormValidator();
+    $name = "";
+    $description = "";
+    $presenter = "";
+    date_default_timezone_set('America/Chicago');
+    $date = date('Y-m-d', time());
+    $time = date('G:i', time());
+
+    $errorMessage = "";
 
 
+    //refill form
+    if(isset($_POST["submit"])) {
+        $name = $_POST["nameText"];
+        $description = $_POST["descText"];
+        $presenter = $_POST["presenterText"];
+        $date = $_POST["date"];
+        $time = $_POST["time"];
 
-//if captcha solved robotValidation=true
-if(isset($_POST["g-recaptcha-response"]) && !empty($_POST["g-recaptcha-response"])) {
-    $secret = "6Ldwj7wUAAAAAKBlnPpB5cX-E72twjQc4SfpOK8y";
-    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
-    $responseData = json_decode($verifyResponse);
-    if($responseData->success)
-    {
-        $robotValidation = true;
-    }
-    else
-    {
-        $robotValidation = false;
-    }
-}
+        if (empty($name)) {
+            $errorMessage .= "Invalid Name <br>";
+        } else if (!($v::validateTextArea($description, 150))) {
+            $errorMessage .= "Invalid Name <br>";
+        }
+        if (empty($description)) {
+            $errorMessage .= "Invalid Description <br>";
+        } else if (!($v::validateTextArea($description, 150))) {
+            $errorMessage .= "Invalid Description <br>";
+        }
+        if (!($v::validateName($presenter))) {
+            $errorMessage .= "Invalid Presenter <br>";
+        }
 
-//refill form
-if(isset($_POST["submit"])) {
-    $name = $_POST["nameText"];
-    $description = $_POST["descText"];
-    $presenter = $_POST["presenterText"];
-    $date = $_POST["date"];
-    $time = $_POST["time"];
-
-    if (empty($name)) {
-        $errorMessage .= "Invalid Name <br>";
-    } else if (!($v::validateTextArea($description, 150))) {
-        $errorMessage .= "Invalid Name <br>";
-    }
-    if (empty($description)) {
-        $errorMessage .= "Invalid Description <br>";
-    } else if (!($v::validateTextArea($description, 150))) {
-        $errorMessage .= "Invalid Description <br>";
-    }
-    if (!($v::validateName($presenter))) {
-        $errorMessage .= "Invalid Presenter <br>";
-    }
-
-    if ($robotValidation) { 
         if(empty($errorMessage)) {
             //do stuff with data
 
@@ -68,17 +52,15 @@ if(isset($_POST["submit"])) {
                 $stmt->bindParam(':time', $time);
 
                 $stmt->execute();
-                
+
                 echo("<h1>Your data was succesfully added to the table.</h1>");
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
             } 
         }
-    } else {
-        $robotError = "Captcha failed";
     }
-
-
+} else {
+    header("Location: login.php");
 }
 
 if(isset($_POST["reset"])) {
@@ -98,13 +80,12 @@ if(isset($_POST["reset"])) {
                 font-style:italic;	
             }
         </style>
-        
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
 
     <body>
         <h1>WDV341</h1>
         <h2>SQL Insert to wdv341_events table</h2>
+        <a href="login.php">Return to login page</a>
         <form name="eventsForm" method="post" action="eventsForm.php">
 
             <p>
@@ -130,8 +111,6 @@ if(isset($_POST["reset"])) {
                 <input type="time" name="time" id="time" value="<?php echo "$time" ?>">
             </p>
 
-            <div class="g-recaptcha" data-sitekey="6Ldwj7wUAAAAABFpKd-j8I0GWxb3zPCzX-yCZDx1"></div>
-            <?php echo "<p class='error'> $robotError </p>"?>
             <?php echo "<p class='error'> $errorMessage </p>"?>
             <p>
                 <input type="submit" name="submit" id="submit" value="Submit">

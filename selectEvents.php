@@ -1,93 +1,30 @@
 <?php
-require_once("connectPDO.php");
+session_start();
+if(isset($_SESSION['validUser']) && $_SESSION['validUser'] == true) {
+    require_once("connectPDO.php");
+
+    $errorMessage = "";
 
 
-$robotValidation = false;
-$table = "
-<tr> 
-    <th>Event Name</th>
-    <th>Event Description</th>
-    <th>Event Presenter</th>
-    <th>Event Date</th>
-    <th>Event Time</th>
-</tr>";
-
-
-$robotError = "";
-$errorMessage = "";
-
-
-
-//if captcha solved robotValidation=true
-if(isset($_POST["g-recaptcha-response"]) && !empty($_POST["g-recaptcha-response"])) {
-    $secret = "6Ldwj7wUAAAAAKBlnPpB5cX-E72twjQc4SfpOK8y";
-    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
-    $responseData = json_decode($verifyResponse);
-    if($responseData->success)
-    {
-        $robotValidation = true;
-    }
-    else
-    {
-        $robotValidation = false;
-    }
-}
-
-
-if(isset($_POST["submit"])) {
-    if ($robotValidation) { 
+    if(isset($_POST["submit"])) {
         if(empty($errorMessage)) {
             try {
                 $sql = "
-                SELECT event_name, event_description, event_presenter, DATE_FORMAT(event_date, '%c/%e/%Y'), event_time
-                FROM wdv341_events
-                WHERE event_id = :id";
-                $out = "";
-                $rows = true;
-                $first = true;
-                $currentID = 1;
-
-
-                while($rows == true) {
-                    if($stmt = $conn->prepare($sql)) {
-                        $event_id = $currentID;
-                        $stmt->bindParam(":id", $event_id);
-                    }
-                    $stmt->execute();
-                    $out = $stmt->fetch();
-                    if ($out[0] == null) {
-                        //if first time through
-                        //$first will remain true
-                        break;
-                    } else {
-                        
-                        $table .= "
-                    <tr>
-                        <td>$out[0]</td>
-                        <td>$out[1]</td>
-                        <td>$out[2]</td>
-                        <td>$out[3]</td>
-                        <td>$out[4]</td>
-                    </tr>";
-                    }
-                    $currentID++;
-                    $first = false;
-                }
-                
-                if($first){
-                    $table = "Table is empty"; //catch empty table
-                }
+                SELECT event_id, event_name, event_description, event_presenter, DATE_FORMAT(event_date, '%c/%e/%Y') AS event_date, event_time
+                FROM wdv341_events";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
             } 
         }
-    } else {
-        $robotError = "Captcha failed";
     }
-}
 
-if(isset($_POST["reset"])) {
-    //runs top of page to set values to default
+    if(isset($_POST["reset"])) {
+        //runs top of page to set values to default
+    }
+} else {
+    header("Location: login.php");
 }
 ?>
 
@@ -102,18 +39,18 @@ if(isset($_POST["reset"])) {
                 color:red;
                 font-style:italic;	
             }
+            th {
+                text-decoration: underline;
+            }
         </style>
 
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
 
     <body>
         <h1>WDV341</h1>
         <h2>SQL Select from wdv341_events table</h2>
-
+        <a href="login.php">Return to login page</a>
         <form name="selectEventsForm" method="post" action="selectEvents.php">
-            <div class="g-recaptcha" data-sitekey="6Ldwj7wUAAAAABFpKd-j8I0GWxb3zPCzX-yCZDx1"></div>
-            <?php echo "<p class='error'> $robotError </p>"?>
             <?php echo "<p class='error'> $errorMessage </p>"?>
             <p>
                 <input type="submit" name="submit" id="submit" value="Get all rows in table">
@@ -122,7 +59,37 @@ if(isset($_POST["reset"])) {
         </form>
 
         <table>
-            <?php echo "$table"?>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Description</th>
+                <th>Event Presenter</th>
+                <th>Event Date</th>
+                <th>Event Time</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+
+            <?php 
+    if(isset($sql)) { //prepared statement was run
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "
+                        <tr>
+                            <td>" . $row['event_name'] . "</td>
+                            <td>" . $row['event_description'] . "</td>
+                            <td>" . $row['event_presenter'] . "</td>
+                            <td>" . $row['event_date'] . "</td>
+                            <td>" . $row['event_time'] . "</td>
+                            <td>
+                            <form name='editForm' method='get' action='updateEventsForm.php'>
+                            <button type='submit' name='id' value='".$row['event_id'] ."'>Update</button></form></td>
+                            <td>
+                            <form name='deleteForm' method='get' action='deleteEvent.php'>
+                            <button type='submit' name='id' value='".$row['event_id'] ."'>Delete</button></form></td>
+                        </tr>
+                        ";
+        }
+    }
+            ?>
         </table>
     </body>
 </html>
