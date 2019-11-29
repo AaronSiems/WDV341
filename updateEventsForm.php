@@ -135,6 +135,7 @@ if(isset($_SESSION['validUser']) && $_SESSION['validUser'] == true) {
     <body>
         <h1>WDV341</h1>
         <h2>SQL Edit event in wdv341_events table</h2>
+        <a href="login.php">Return to login page</a>
         <form name="eventsForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=" . $_GET['id'] ?>">
 
             <p>
