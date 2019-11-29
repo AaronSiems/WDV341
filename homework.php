@@ -58,6 +58,18 @@
                     <li><a href="connectionTest.php" target="_blank">PHP Connection Test</a></li>
                     <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
                     <li><a href="selectOneEvent.php" target="_blank">Select One Event</a></li>
+                    <li><a href="login.php" target="_blank">Login page</a>
+                        <ol>
+                            <li>Select All Events
+                                <ul>
+                                    <li>Edit/Delete events</li>
+                                </ul>
+                            </li>
+                            <li>Add event form</li>
+                            <li>Logout</li>
+                        </ol>
+                    </li>
+                    
                 </ul>
                 
                 <ul style="float: right; text-align: left;">
@@ -66,7 +78,7 @@
                     <li><a href="basics.php" target="_blank">PHP Basics</a></li>
                     <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
                     <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
-                    <li><a href="selectEvents.php" target="_blank">Select Events</a></li>
+                    <li><a href="selectEvents.php" target="_blank" style="text-decoration: line-through;">Select Events</a> Redirects to login page</li>
                     <li><a href="formatEvents/formatEvents.php" target="_blank">Formated Select</a></li>
                 </ul>
             </div>

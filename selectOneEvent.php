@@ -3,6 +3,10 @@ require_once("connectPDO.php");
 
 
 $robotValidation = false;
+//this way has a lot of problems with it for other uses
+//and is originally how I did it in the selectEvents page.
+//That page now uses a better way but since this works for selecting
+//the single event I'm not going to change it
 $table = "
 <tr> 
     <th>Event Name</th>
@@ -45,7 +49,7 @@ if(isset($_POST["submit"])) {
                 $out = "";
                 $rows = true;
                 $first = true;
-                $currentID = 1;
+                $currentID = 2;
 
 
 
@@ -75,7 +79,7 @@ if(isset($_POST["submit"])) {
 
 
                 if($first){
-                    $table = "Table is empty"; //Catch empty table
+                    $table = "Row is empty/does not exist"; //Catch empty table
                 }
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
@@ -116,7 +120,7 @@ if(isset($_POST["reset"])) {
             <?php echo "<p class='error'> $robotError </p>"?>
             <?php echo "<p class='error'> $errorMessage </p>"?>
             <p>
-                <input type="submit" name="submit" id="submit" value="Get 1st row in table">
+                <input type="submit" name="submit" id="submit" value="Get 2nd row in table">
                 <input type="submit" name="reset" id="reset" value="Reset">
             </p>
         </form>
