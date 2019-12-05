@@ -1,0 +1,97 @@
+body{
+    background-color: darkslategrey;
+    color: white;
+    text-align: center;
+}
+
+a{
+    color:aliceblue;
+}
+a:hover{
+    color:lightblue;
+}
+
+
+form{
+    width: 50%;
+    border: 2px solid;
+    border-radius: 25px;
+    padding: 3%;
+    margin: 1% auto;
+    text-align: left;
+}
+
+form label {
+    align-content: left; 
+    padding: 2%;
+}
+
+textarea {
+    border: 2px solid;
+    border-radius: 4px;
+    text-align: center;
+    width: 75%;
+    height: 100px;
+}
+
+form input[type=text], form input[type=email] {
+    border-radius: 6px;
+    width: 40%
+}
+
+form input[type=submit], form input[type=reset]{
+    margin-left: 2%;
+    border-radius: 4px;
+    background-color: mediumseagreen;
+    color: white;
+}
+
+.navbar-nav{
+    float: none;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    padding-right: 2%;
+}
+
+.dropdown {
+    background-color: #343a40;
+}
+
+.dropdown-toggle {
+    color:#949d9a;
+}
+
+.dropdown-menu {
+    background-color: #343a40;
+    color: #949d9a;
+    border: none;
+    padding-left: 5%;
+}
+.captchaError {
+    color: red;
+}
+
+.generalError {
+    color: firebrick;
+}
+
+.coinImage {
+    width: 250px;
+    height: 250px;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.infoLink {
+    color: aqua;
+    text-decoration: underline;
+}
+
