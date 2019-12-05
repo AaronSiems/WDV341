@@ -86,6 +86,7 @@
                             <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
                             <li><a href="selectEvents.php" target="_blank" style="text-decoration: line-through;">Select Events</a> Redirects to login page</li>
                             <li><a href="formatEvents/formatEvents.php" target="_blank">Formated Select</a></li>
+                            <li><a href="processEmail.php" target="_blank">Proccess email (Emailer class example)</a></li>
                         </ul>
                     </div>
                 </div>
