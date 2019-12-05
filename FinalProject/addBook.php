@@ -50,6 +50,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $msg = "<h1>The book '$name' was succesfully added to the table.</h1>";
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
+                
+                require_once("Emailer.php");
+                $Sender = "aaronjsiems@gmail.com";
+                $SendTo = "admin@aaronsiems.com";
+                $Subj = "Error";
+                $Mess = "An error occured in the final addBook file. \n"  + $errorMessage;
+                $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
             } 
         }
     }

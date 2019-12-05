@@ -11,6 +11,13 @@ try {
     $stmt->execute();
 } catch (PDOException $ex) {
     $errorMessage = $ex->getMessage();
+    
+    require_once("Emailer.php");
+    $Sender = "aaronjsiems@gmail.com";
+    $SendTo = "admin@aaronsiems.com";
+    $Subj = "Error";
+    $Mess = "An error occured in the final books file. \n"  + $errorMessage;
+    $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
 }  
 
 

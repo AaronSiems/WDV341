@@ -51,6 +51,12 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $msg = "<h1>The book was succesfully changed. $name $author $formatISBN</h1>";
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
+                require_once("Emailer.php");
+                $Sender = "aaronjsiems@gmail.com";
+                $SendTo = "admin@aaronsiems.com";
+                $Subj = "Error";
+                $Mess = "An error occured in the final updateBook file. \n"  + $errorMessage;
+                $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
             } 
         }
     } else {
@@ -71,6 +77,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $isbn = str_replace('-', '', $row['isbn']);
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
+                
+                require_once("Emailer.php");
+                $Sender = "aaronjsiems@gmail.com";
+                $SendTo = "admin@aaronsiems.com";
+                $Subj = "Error";
+                $Mess = "An error occured in the final updateBook file. \n"  + $errorMessage;
+                $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
                 header( "refresh:5;url=selectEvents.php" );
                 echo"An error occured, please try again later. You will be redirected back to selectEvents in 5 seconds. <a href='selectEvents.php'>Click here if you are not redirected.</a>";
             }
@@ -98,6 +111,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $isbn = str_replace('-', '', $row['isbn']);
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
+                
+                require_once("Emailer.php");
+                $Sender = "aaronjsiems@gmail.com";
+                $SendTo = "admin@aaronsiems.com";
+                $Subj = "Error";
+                $Mess = "An error occured in the final updateBook file. \n"  + $errorMessage;
+                $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
                 header( "refresh:5;url=selectEvents.php" );
                 echo"An error occured, please try again later. You will be redirected back to selectEvents in 5 seconds. <a href='selectEvents.php'>Click here if you are not redirected.</a>";
             }

@@ -30,21 +30,10 @@ textarea {
     border: 2px solid;
     border-radius: 4px;
     text-align: center;
-    width: 75%;
+    width: 200%;
     height: 100px;
 }
 
-form input[type=text], form input[type=email] {
-    border-radius: 6px;
-    width: 40%
-}
-
-form input[type=submit], form input[type=reset]{
-    margin-left: 2%;
-    border-radius: 4px;
-    background-color: mediumseagreen;
-    color: white;
-}
 
 .cleanForm {
     width: none;

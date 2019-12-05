@@ -14,7 +14,13 @@ try {
 }
 catch(PDOException $e)
 {
-    $ConnectionError = $e;
+    //Send an error to my email
+    require_once("Emailer.php");
+    $Sender = "aaronjsiems@gmail.com";
+    $SendTo = "admin@aaronsiems.com";
+    $Subj = "Error";
+    $Mess = "An error occured in the final connectPDO file. \n"  + $e;
+    $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
 }
 ?>
 

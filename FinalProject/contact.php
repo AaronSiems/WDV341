@@ -1,5 +1,77 @@
 <?php
 session_start();
+require_once("Emailer.php");
+
+$emailOut = "admin@aaronsiems.com";
+$email = "";
+$subject = "";
+$message = "";
+
+$robotValidation = false;
+$robotError = "";
+$errorMessage = "";
+$Success_Message = "";
+
+if(isset($_POST["g-recaptcha-response"]) && !empty($_POST["g-recaptcha-response"])) {
+    $secret = "6Ldwj7wUAAAAAKBlnPpB5cX-E72twjQc4SfpOK8y";
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+    $responseData = json_decode($verifyResponse);
+    if($responseData->success)
+    {
+        $robotValidation = true;
+    }
+    else
+    {
+        $robotValidation = false;
+    }
+}
+
+if(isset($_POST["submit"])) {
+    //Grab variables for self-post
+    $email = $_POST["email"];
+    $message = $_POST["msg"];
+    $subject = $_POST["subject"];
+
+
+
+    if ($robotValidation) { //Check captcha then errors
+        $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+
+        if(!preg_match($email_exp,$email)) {
+            $errorMessage .= 'The Email Address you entered does not appear to be valid.<br />';
+        }
+
+
+        if(strlen($message) < 2) {
+            $errorMessage .= 'The Comments you entered do not appear to be valid.<br />';
+        }
+
+        if(strlen($errorMessage) > 0) {
+            //Do nothing, error message will appear when page loads
+        } else { //No errors - send mail
+
+            function clean_string($string) {
+                $bad = array("content-type","bcc:","to:","cc:","href");
+                return str_replace($bad,"",$string);
+            }
+            $email_message = "Message: ".clean_string($message)."\n";
+            $subject = clean_string($subject);
+            
+            $emailSend = new Emailer($email, $emailOut, $subject, $email_message);
+            $out = $emailSend->sendEmail();
+            
+            $confirmSubj = "Confirmation Email";
+            $confirmMsg = "Your message to generic library was sent. Email info: " . $out;
+            $confirmEmail = new Emailer($emailOut, $email, $confirmSubj, $confirmMsg);
+            $uselessVar = $confirmEmail->sendEmail();
+            
+            $Success_Message = "Your email was sent </br><a href='index.php'>Return to homepage?</a>";
+        }
+    } else {
+        $robotError = "Captcha failed";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -15,6 +87,7 @@ session_start();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Library Contact</title>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
 
     <body>
@@ -43,8 +116,36 @@ session_start();
                     </div>
                 </nav>
                 
-                </br>
-                <p>Hello</p>
+                <div class="row">
+                    <div class="col">
+                    <form id="contact" action="contact.php" method="post">
+
+                        <div id="formitem">
+                            <label for="email"> Email: </label>
+                            <input type="email" name="email" value="<?php echo"$email"?>"><br />
+                        </div>
+
+                        <div id="formitem">
+                            <label for="subject">Subject: </label>
+                            <input type="text" name="subject" value="<?php echo"$subject"?>">
+                                
+                            </select><br />
+                        </div>
+
+                        <div id="formitem">
+                            <label for="msg">
+                                <textarea name="msg" form="contact" placeholder="Enter your message here"><?php echo"$message"?></textarea></label><br />
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="6Ldwj7wUAAAAABFpKd-j8I0GWxb3zPCzX-yCZDx1"></div>
+                        <?php echo "<p class='captchaError'> $robotError </p>"?>
+                        <?php echo "<p class='generalError'> $errorMessage </p>"?>
+                        <?php echo "<p> $Success_Message </p>"?>
+                        <p>
+                            <input type="submit" name="submit" id="submit" value="Submit">
+                            <input type="submit" name="reset" id="reset" value="Clear fields"/>
+                    </form>
+                    </div>
+                </div>
             </div>
         </section>
         
