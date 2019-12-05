@@ -49,39 +49,53 @@
                 </nav>
                 
                 </br>
-                <h3><a href="https://github.com/AaronSiems/WDV341" target="_blank">Github folder</a></h3>
-                <ul style="float: left; text-align: left;">
-                    </br>
-                    </br>
-                    <li><a href="testGit.php" target="_blank">Github test</a></li>
-                    <li><a href="functions.php" target="_blank">PHP Functions</a></li>
-                    <li><a href="connectionTest.php" target="_blank">PHP Connection Test</a></li>
-                    <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
-                    <li><a href="selectOneEvent.php" target="_blank">Select One Event</a></li>
-                    <li><a href="login.php" target="_blank">Login page</a>
-                        <ol>
-                            <li>Select All Events
-                                <ul>
-                                    <li>Edit/Delete events</li>
-                                </ul>
+                <div class="row">
+                    <div class="col">
+                    <h3><a href="https://github.com/AaronSiems/WDV341" target="_blank">Github folder</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <ul style="text-align: left">
+                            </br>
+                            </br>
+                            <li><a href="testGit.php" target="_blank">Github test</a></li>
+                            <li><a href="functions.php" target="_blank">PHP Functions</a></li>
+                            <li><a href="connectionTest.php" target="_blank">PHP Connection Test</a></li>
+                            <li><a href="validatorTests.php" target="_blank">Form Validator Class Tests</a></li>
+                            <li><a href="selectOneEvent.php" target="_blank">Select One Event</a></li>
+                            <li><a href="login.php" target="_blank">Login page</a>
+                                <ol>
+                                    <li>Select All Events
+                                        <ul>
+                                            <li>Edit/Delete events</li>
+                                        </ul>
+                                    </li>
+                                    <li>Add event form</li>
+                                    <li>Logout</li>
+                                </ol>
                             </li>
-                            <li>Add event form</li>
-                            <li>Logout</li>
-                        </ol>
-                    </li>
-                    
-                </ul>
-                
-                <ul style="float: right; text-align: left;">
-                    </br>
-                    </br>
-                    <li><a href="basics.php" target="_blank">PHP Basics</a></li>
-                    <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
-                    <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
-                    <li><a href="selectEvents.php" target="_blank" style="text-decoration: line-through;">Select Events</a> Redirects to login page</li>
-                    <li><a href="formatEvents/formatEvents.php" target="_blank">Formated Select</a></li>
-                </ul>
+                        </ul>
+                    </div>
+                    <div class="col-md">
+                        <ul style="text-align: left">
+                            </br>
+                            </br>
+                            <li><a href="basics.php" target="_blank">PHP Basics</a></li>
+                            <li><a href="customerRegistrationForm.php" target="_blank">Self Posting Form and Validate Form</a></li>
+                            <li><a href="eventsForm.php" target="_blank">Events db form</a></li>
+                            <li><a href="selectEvents.php" target="_blank" style="text-decoration: line-through;">Select Events</a> Redirects to login page</li>
+                            <li><a href="formatEvents/formatEvents.php" target="_blank">Formated Select</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    <h3><a href="FinalProject/index.php" target="_blank">Final Project - Website for a library with a catalog list.</a></h3>
+                    </div
+                </div>
             </div>
+            
         </section>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
