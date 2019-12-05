@@ -37,7 +37,12 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
             //do stuff with data
 
             try {
-                $stmt = $conn->prepare("INSERT INTO final_books (books_name, books_author, books_isbn) VALUES (:name, :author, :isbn);");
+                
+                $stmt = $conn->prepare("UPDATE final_books
+                SET books_name='$name',
+                books_author='$author',
+                books_isbn='$isbn'
+                WHERE books_id'" . $_GET['id'] . "';");
                 
                 $formatISBN = substr($isbn, 0, 3) . "-" . substr($isbn, 3, 1) . "-" . substr($isbn, 4, 2) . "-" . substr($isbn, 6, 6) . "-" .substr($isbn, 12, 1);
                 
@@ -47,7 +52,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
 
                 $stmt->execute();
 
-                $msg = "<h1>The book '$name' was succesfully added to the table.</h1>";
+                $msg = "<h1>The book was succesfully changed.</h1>";
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
             } 
@@ -67,7 +72,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $name = $row['title'];
                 $author = $row['author'];
-                $isbn = $row['isbn'];
+                $isbn = str_replace('-', '', $row['isbn']);
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
                 header( "refresh:5;url=selectEvents.php" );
@@ -94,7 +99,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $name = $row['title'];
                 $author = $row['author'];
-                $isbn = $row['isbn'];
+                $isbn = str_replace('-', '', $row['isbn']);
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
                 header( "refresh:5;url=selectEvents.php" );
