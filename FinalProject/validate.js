@@ -69,7 +69,7 @@ function checkAuthor() {
     
     if (author.length > 25) {
         msg = "Author title is too long";
-    } else if (name.length == 0) {
+    } else if (author.length == 0) {
         msg = "You must enter an author.";
     }
     

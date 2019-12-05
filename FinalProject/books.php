@@ -1,5 +1,21 @@
 <?php
 session_start();
+require_once("connectPDO.php");
+
+$errorMessage = "";
+try {
+    $sql = "
+    SELECT books_id AS id, books_name AS title, books_author AS author, books_isbn AS isbn 
+    FROM final_books";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+} catch (PDOException $ex) {
+    $errorMessage = $ex->getMessage();
+}  
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -34,6 +50,7 @@ session_start();
                         <ul class="navbar-nav ml-auto">
                             <?php
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) { ?>
+                            <li class="nav-item"><a class="nav-link" href="login.php">Admin Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
                             <?php } else { ?>
                             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
@@ -43,7 +60,42 @@ session_start();
                 </nav>
                 
                 </br>
-                <p>Hello</p>
+                <div id="books">
+                    <?php 
+                    if(isset($sql)) { //prepared statement was run
+                        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            
+                            if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
+                                echo "
+                                </br>
+                                <div class='book-container'>
+                                    <h3>Title: " . $row['title'] . "</h3>
+                                    <h5>Author: " . $row['author'] . "</h5>
+                                    <h5>ISBN: " . $row['isbn'] . "</h5>
+                                    <form class='cleanForm' name='editBook' method='get' action='updateBook.php'>
+                                        <button type='submit' name='id' value='" . $row['id'] ."'>Edit book</button>
+                                    </form>
+                                    <form class='cleanForm' name='deleteBook' method='get' action='deleteBook.php'>
+                                        <button type='submit' name='id' value='" . $row['id'] ."'>Remove book</button>
+                                    </form>
+                                </div>
+                                </br>
+                                ";
+                            } else {
+                                echo "
+                                </br>
+                                <div class='book-container'>
+                                    <h3>Title: " . $row['title'] . "</h3>
+                                    <h5>Author: " . $row['author'] . "</h5>
+                                    <h5>ISBN: " . $row['isbn'] . "</h5>
+                                </div>
+                                </br>
+                                ";
+                            }
+                        }
+                    }
+                    ?>
+                </div>
             </div>
         </section>
         

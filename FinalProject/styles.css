@@ -46,6 +46,16 @@ form input[type=submit], form input[type=reset]{
     color: white;
 }
 
+.cleanForm {
+    width: none;
+    border: none;
+    padding: 0 auto;
+    margin: 0 auto;
+    text-align: center;
+    align-content: center;
+    display: inline;
+}
+
 .navbar-nav{
     float: none;
     text-align: center;
@@ -93,5 +103,14 @@ form input[type=submit], form input[type=reset]{
 .infoLink {
     color: aqua;
     text-decoration: underline;
+}
+
+.book-container {
+    border: 2px solid;
+    border-radius: 4px;
+    width: 50%;
+    align-items: center;
+    align-content: center;
+    margin: auto;
 }
 
