@@ -38,21 +38,17 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
 
             try {
                 
+                $formatISBN = substr($isbn, 0, 3) . "-" . substr($isbn, 3, 1) . "-" . substr($isbn, 4, 2) . "-" . substr($isbn, 6, 6) . "-" .substr($isbn, 12, 1);
+                
                 $stmt = $conn->prepare("UPDATE final_books
                 SET books_name='$name',
                 books_author='$author',
-                books_isbn='$isbn'
-                WHERE books_id'" . $_GET['id'] . "';");
-                
-                $formatISBN = substr($isbn, 0, 3) . "-" . substr($isbn, 3, 1) . "-" . substr($isbn, 4, 2) . "-" . substr($isbn, 6, 6) . "-" .substr($isbn, 12, 1);
-                
-                $stmt->bindParam(':name', $name);
-                $stmt->bindParam(':author', $author);
-                $stmt->bindParam(':isbn', $formatISBN);
+                books_isbn='$formatISBN'
+                WHERE books_id='" . $_GET['id'] . "';");
 
                 $stmt->execute();
 
-                $msg = "<h1>The book was succesfully changed.</h1>";
+                $msg = "<h1>The book was succesfully changed. $name $author $formatISBN</h1>";
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
             } 
@@ -138,7 +134,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
         <script src=validate.js></script>
         </br>
         <a href="books.php">Return to book selection page</a>
-        <form name="eventsForm" method="post" action="addBook.php">
+        <form name="eventsForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=" . $_GET['id'] ?>">
 
             <p>
                 <label for="bookNameText">Book Name:</label>
