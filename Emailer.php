@@ -16,35 +16,35 @@ class Emailer {
     }
 
     function setSenderAddress($input){
-        $SenderAddress = $input;
+        $this->SenderAddress = $input;
     }
 
     function setSendToAddress($input){
-        $SendToAddress = $input;
+        $this->SendToAddress = $input;
     }
 
     function setSubject($input){
-        $Subject = $input;
+        $this->Subject = $input;
     }
 
-    function setMessage(){
-        $Message = $input;
+    function setMessage($input){
+        $this->Message = $input;
     }
 
     function getSenderAddress(){
-        return $SenderAddress;
+        return $this->SenderAddress;
     }
 
     function getSendToAddress(){
-        return $SendToAddress;
+        return $this->SendToAddress;
     }
 
     function getSubject(){
-        return $Subject;
+        return $this->Subject;
     }
 
     function getMessage(){
-        return $Message;
+        return $this->Message;
     }
 
     function sendEmail() {
@@ -67,7 +67,8 @@ class Emailer {
 
 
         if($errorMessage == "") { //No errors in the message
-            $headers = 'From: '.$this->SenderAddress."\r\n".
+            $headers = 'To: '.$this->SendToAddress."\r\n".
+                'From: '.$this->SenderAddress."\r\n".
                 'Reply-To: '.$this->SenderAddress."\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             //Commented out because I don't want mail actually sent from this page.
