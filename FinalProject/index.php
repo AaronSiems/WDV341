@@ -59,7 +59,7 @@ session_start();
                             <a href="books.php" style="color: aqua;">Browse our selection of books here.</a>
                             </br>
                             </br>
-                            <p>Our library offers many wonderful books and services such as public internet and computers, </p>
+                            <p>Our library offers many wonderful books and services such as public internet and computers, after school activites for young children, rooms to hold group activities, and so much more.</p>
                         </h4>
                     </div>
                 </div>
