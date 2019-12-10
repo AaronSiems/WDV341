@@ -4,6 +4,7 @@ require_once("connectPDO.php");
 
 $errorMessage = "";
 try {
+
     $sql = "
     SELECT books_id AS id, books_name AS title, books_author AS author, books_isbn AS isbn 
     FROM final_books";
@@ -18,6 +19,9 @@ try {
     $Subj = "Error";
     $Mess = "An error occured in the final books file. \n"  + $errorMessage;
     $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
+    
+    header( "refresh:5;url=index.php" );
+    echo"An error occured and we could not connect to our server. You will be redirected back to the homepage in 5 seconds. <a href='index.php'>Click here if you are not redirected.</a>";
 }  
 
 
@@ -70,9 +74,18 @@ try {
                 <div id="books">
                     <?php 
                     if(isset($sql)) { //prepared statement was run
+                        $counter = 1;
                         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             
                             if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
+                                if($counter % 2 != 0){ //odd number, out a row.
+                                    echo "
+                                    <div class='row'>
+                                        <div class='col-md'>";
+                                } else {
+                                    echo "
+                                    <div class='col-md'>";
+                                }
                                 echo "
                                 </br>
                                 <div class='book-container'>
@@ -88,7 +101,24 @@ try {
                                 </div>
                                 </br>
                                 ";
+                                if($counter % 2 == 0){ //close format 
+                                    echo "
+                                        </div>
+                                    </div>";
+                                } else {
+                                    echo "
+                                        </div>";
+                                }
+                                $counter++;
                             } else {
+                                if($counter % 2 != 0){ //odd number, out a row.
+                                    echo "
+                                    <div class='row'>
+                                        <div class='col-md'>";
+                                } else {
+                                    echo "
+                                    <div class='col-md'>";
+                                }
                                 echo "
                                 </br>
                                 <div class='book-container'>
@@ -98,6 +128,15 @@ try {
                                 </div>
                                 </br>
                                 ";
+                                if($counter % 2 == 0){ //close format 
+                                    echo "
+                                        </div>
+                                    </div>";
+                                } else {
+                                    echo "
+                                        </div>";
+                                }
+                                $counter++;
                             }
                         }
                     }

@@ -84,12 +84,12 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
                 $Subj = "Error";
                 $Mess = "An error occured in the final updateBook file. \n"  + $errorMessage;
                 $email = new Emailer($Sender, $SendTo, $Subj, $Mess);
-                header( "refresh:5;url=selectEvents.php" );
-                echo"An error occured, please try again later. You will be redirected back to selectEvents in 5 seconds. <a href='selectEvents.php'>Click here if you are not redirected.</a>";
+                header( "refresh:3;url=addBook.php" );
+                echo"An error occured, please try again later. You will be redirected back to selectEvents in 3 seconds. <a href='addBook.php'>Click here if you are not redirected.</a>";
             }
         } else {
-            header( "refresh:5;url=selectEvents.php" );
-            echo"An error occured, the record to edit was not found. You will be redirected back to selectEvents in 5 seconds. <a href='selectEvents.php'>Click here if you are not redirected.</a>";
+            header( "refresh:3;url=addBook.php" );
+            echo"An error occured, the record to edit was not found. You will be redirected back to selectEvents in 3 seconds. <a href='addBook.php'>Click here if you are not redirected.</a>";
         }
     }
     
@@ -155,7 +155,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
         </br>
         <a href="books.php">Return to book selection page</a>
         <form name="eventsForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=" . $_GET['id'] ?>">
-
+            <h3>Update a book</h3>
             <p>
                 <label for="bookNameText">Book Name:</label>
                 <input type="text" name="bookNameText" id="bookNameText" oninput="checkName()" value="<?php echo "$name" ?>"> <span class="error" id="nameError"></span>
@@ -182,6 +182,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
             
             <?php echo "<h1>$msg</h1>"; ?>
         </form>
+        <a href="books.php">Return to book selection page</a>
 
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

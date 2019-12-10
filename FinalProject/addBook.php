@@ -92,7 +92,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
         <script src=validate.js></script>
         <a href="login.php">Return to login page</a>
         <form name="eventsForm" method="post" action="addBook.php">
-
+            <h3>Add a book</h3>
             <p>
                 <label for="bookNameText">Book Name:</label>
                 <input type="text" name="bookNameText" id="bookNameText" oninput="checkName()" value="<?php echo "$name" ?>"> <span class="error" id="nameError"></span>
@@ -119,6 +119,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {
             
             <?php echo "<h1>$msg</h1>"; ?>
         </form>
+        <a href="login.php">Return to login page</a>
 
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

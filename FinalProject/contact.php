@@ -133,13 +133,12 @@ if(isset($_POST["submit"])) {
                         </div>
 
                         <div id="formitem">
-                            <label for="msg">
-                                <textarea name="msg" form="contact" placeholder="Enter your message here"><?php echo"$message"?></textarea></label><br />
+                            <textarea name="msg" form="contact" placeholder="Enter your message here"><?php echo"$message"?></textarea><br />
                         </div>
                         <div class="g-recaptcha" data-sitekey="6Ldwj7wUAAAAABFpKd-j8I0GWxb3zPCzX-yCZDx1"></div>
                         <?php echo "<p class='captchaError'> $robotError </p>"?>
                         <?php echo "<p class='generalError'> $errorMessage </p>"?>
-                        <?php echo "<p> $Success_Message </p>"?>
+                        <?php echo "<p class='success'> $Success_Message </p>"?>
                         <p>
                             <input type="submit" name="submit" id="submit" value="Submit">
                             <input type="submit" name="reset" id="reset" value="Clear fields"/>

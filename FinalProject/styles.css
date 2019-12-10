@@ -11,14 +11,18 @@ a:hover{
     color:lightblue;
 }
 
+img{
+    width: 95%;
+}
+
 
 form{
-    width: 50%;
+    width: 80%;
     border: 2px solid;
     border-radius: 25px;
     padding: 3%;
     margin: 1% auto;
-    text-align: left;
+    text-align: center;
 }
 
 form label {
@@ -30,7 +34,8 @@ textarea {
     border: 2px solid;
     border-radius: 4px;
     text-align: center;
-    width: 200%;
+    display: inline-block;
+    width: 50%;
     height: 100px;
 }
 
@@ -97,9 +102,22 @@ textarea {
 .book-container {
     border: 2px solid;
     border-radius: 4px;
-    width: 50%;
+    width: 100%;
     align-items: center;
     align-content: center;
     margin: auto;
+}
+
+.success {
+    font-size: 36px;
+    color: limegreen;
+}
+
+.g-recaptcha{
+    display: inline-block;
+}
+
+.img-footer{
+    font-size: 8px;
 }
 

@@ -44,7 +44,25 @@ session_start();
                 </nav>
                 
                 </br>
-                <p>Hello</p>
+                <div class="row">
+                    <div class="col-md">
+                        <h3>Welcome to generic library's website.</h3>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <div class="col-md">
+                        <img src="images/library.jpg" alt="interier of a library"><p class="img-footer">Photo by j zamora on Unsplash</p>
+                    </div>
+                    <div class="col-md">
+                        <h4>
+                            <a href="books.php" style="color: aqua;">Browse our selection of books here.</a>
+                            </br>
+                            </br>
+                            <p>Our library offers many wonderful books and services such as public internet and computers, </p>
+                        </h4>
+                    </div>
+                </div>
             </div>
         </section>
         

@@ -54,13 +54,13 @@ if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) { //Valid user
         <meta name="description" content="WDV341 final project">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title><?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {echo 'Admin Portal';} else {echo 'Login';}?></title>
     </head>
 
     <body>
         <section id="main" class="bg">
             <div class="container">
-                <h1>Generic Library Admin Login</h1>
+                <h1>Generic Library Admin <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) {echo 'Portal';} else {echo 'Login';}?></h1>
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span class="navbar-toggler-icon"></span>
